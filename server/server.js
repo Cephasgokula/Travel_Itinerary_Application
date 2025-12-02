@@ -5,15 +5,12 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Gemini API configuration
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
-// Helper function to call Gemini API
 async function callGeminiAPI(prompt) {
     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
         method: 'POST',
@@ -44,19 +41,14 @@ async function callGeminiAPI(prompt) {
     return data.candidates[0].content.parts[0].text;
 }
 
-// API Routes
-
-// Health check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// Generate itinerary
 app.post('/api/generate-itinerary', async (req, res) => {
     try {
         const { destination, startDate, endDate, days, interests, budget } = req.body;
 
-        // Validate input
         if (!destination || !interests || !budget || !days) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
@@ -149,7 +141,6 @@ Requirements:
 
         const response = await callGeminiAPI(prompt);
 
-        // Parse JSON response
         let parsedData;
         try {
             const jsonMatch = response.match(/\{[\s\S]*\}/);
@@ -171,7 +162,6 @@ Requirements:
     }
 });
 
-// Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

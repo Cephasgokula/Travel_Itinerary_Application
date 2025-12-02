@@ -7,7 +7,7 @@ import Results from './components/Results';
 const API_URL = 'http://localhost:5000/api';
 
 function App() {
-  const [view, setView] = useState('form'); // form, loading, results, error
+  const [view, setView] = useState('form');
   const [tripData, setTripData] = useState(null);
   const [itineraryData, setItineraryData] = useState(null);
   const [error, setError] = useState('');
@@ -43,7 +43,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-sky" style={{ fontFamily: 'Inter, sans-serif' }}>
-      {/* Header */}
       <header className="bg-navy text-white py-5 shadow-lg">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-3">
@@ -54,7 +53,6 @@ function App() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-8 max-w-5xl">
         {view === 'form' && <TripForm onSubmit={handleSubmit} />}
         {view === 'loading' && <Loading />}
@@ -80,7 +78,6 @@ function App() {
         )}
       </main>
 
-      {/* Footer */}
       <footer className="bg-navy text-gray-300 py-6 mt-12">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm flex items-center justify-center gap-2">
