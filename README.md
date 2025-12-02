@@ -104,7 +104,7 @@ PORT=5000
 
 **Example:**
 ```env
-GEMINI_API_KEY=AIzaSyAbCdEfGhIjKlMnOpQrStUvWxYz1234567
+GEMINI_API_KEY= example_gemini_api_key
 PORT=5000
 ```
 
