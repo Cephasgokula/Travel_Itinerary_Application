@@ -45,12 +45,23 @@ travel-itinerary-assistant/
 │
 ├── server/                    # Node.js Backend (Port 5000)
 │   ├── server.js
-│   ├── .env
+│   ├── .env                   # Create this file (see setup below)
 │   └── package.json
 │
 ├── index.html                 # Standalone version (no setup needed)
 └── README.md
 ```
+
+---
+
+## 🔑 Get Your Gemini API Key
+
+Before running the project, you need a **Google Gemini API key**:
+
+1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click **"Create API Key"**
+4. Copy the generated API key
 
 ---
 
@@ -74,7 +85,32 @@ npm --version
 
 You need **2 terminal windows** - one for backend, one for frontend.
 
-### Step 1: Start Backend Server
+### Step 1: Setup Backend Environment
+
+Navigate to the server folder and create a `.env` file:
+
+```bash
+cd server
+```
+
+Create a file named `.env` in the `server` folder with the following content:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+PORT=5000
+```
+
+⚠️ **Important:** Replace `your_gemini_api_key_here` with your actual Gemini API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
+
+**Example:**
+```env
+GEMINI_API_KEY= example_gemini_api_key
+PORT=5000
+```
+
+---
+
+### Step 2: Start Backend Server
 
 Open **Terminal 1** and run:
 
@@ -95,7 +131,7 @@ npm start
 
 ---
 
-### Step 2: Start React Frontend
+### Step 3: Start React Frontend
 
 Open **Terminal 2** (new window) and run:
 
@@ -116,7 +152,7 @@ npm start
 
 ---
 
-### Step 3: Use the Application
+### Step 4: Use the Application
 
 1. Open `http://localhost:3000` in your browser
 2. Enter a destination (e.g., "Goa", "Paris", "Tokyo")
@@ -148,12 +184,19 @@ xdg-open index.html
 
 Or just double-click the `index.html` file.
 
+> **Note:** The standalone version uses a built-in API key which may have usage limits.
+
 ---
 
 ## 🔧 Troubleshooting
 
 ### "npm: command not found"
 → Install Node.js from https://nodejs.org/
+
+### "GEMINI_API_KEY not set" or "Invalid API Key"
+→ Make sure you created the `.env` file in the `server` folder
+→ Verify your API key is correct (no extra spaces or quotes)
+→ Get a new key from [Google AI Studio](https://aistudio.google.com/app/apikey)
 
 ### "Port 5000 already in use"
 → Change the port in `server/.env`:
@@ -167,6 +210,7 @@ const API_URL = 'http://localhost:5001/api';
 
 ### "Network Error" when generating itinerary
 → Make sure the backend server is running (Terminal 1)
+→ Verify your `.env` file exists and contains a valid API key
 
 ### Page shows blank
 → Make sure React app is running (Terminal 2)
@@ -176,6 +220,15 @@ const API_URL = 'http://localhost:5001/api';
 ## 📸 Quick Visual Guide
 
 ```
+┌─────────────────────────────────────────────────────────────┐
+│                    STEP 0: Create .env file                  │
+│  Create file: server/.env                                    │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │ GEMINI_API_KEY=your_api_key_here                    │    │
+│  │ PORT=5000                                            │    │
+│  └─────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────┘
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    TERMINAL 1 (Backend)                      │
 │  $ cd server                                                 │
@@ -215,9 +268,18 @@ const API_URL = 'http://localhost:5001/api';
 
 | What | Command | Port |
 |------|---------|------|
+| Setup | Create `server/.env` with your Gemini API key | - |
 | Backend | `cd server && npm install && npm start` | 5000 |
 | Frontend | `cd client && npm install && npm start` | 3000 |
 | Standalone | Open `index.html` in browser | - |
+
+---
+
+## 🔐 Security Note
+
+- Never commit your `.env` file to GitHub
+- The `.env` file is already in `.gitignore` to keep your API key safe
+- If you accidentally expose your API key, regenerate it immediately at [Google AI Studio](https://aistudio.google.com/app/apikey)
 
 ---
 
